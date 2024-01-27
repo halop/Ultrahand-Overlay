@@ -6,52 +6,52 @@
     },
     {
         "name": "925 mV",
-        "label": "925 mV",
+        "label": "925 mV - unsafe",
         "hex": "481D0E"
     },
     {
         "name": "937.5 mV",
-        "label": "937.5 mV",
+        "label": "937.5 mV - unsafe",
         "hex": "1C4E0E"
     },
     {
         "name": "950 mV",
-        "label": "950 mV",
+        "label": "950 mV - unsafe",
         "hex": "F07E0E"
     },
     {
         "name": "962.5 mV",
-        "label": "962.5 mV",
+        "label": "962.5 mV - unsafe",
         "hex": "C4AF0E"
     },
     {
         "name": "975 mV",
-        "label": "975 mV",
+        "label": "975 mV - unsafe",
         "hex": "98E00E"
     },
     {
         "name": "987.5 mV",
-        "label": "987.5 mV",
+        "label": "987.5 mV - unsafe",
         "hex": "6CZZ0F"
     },
     {
         "name": "1000 mV",
-        "label": "1000 mV",
+        "label": "1000 mV - unsafe",
         "hex": "40420F"
     },
     {
         "name": "1012.5 mV",
-        "label": "1012.5 mV",
+        "label": "1012.5 mV - unsafe",
         "hex": "14730F"
     },
     {
         "name": "1025 mV",
-        "label": "1025 mV",
+        "label": "1025 mV - unsafe",
         "hex": "E8A30F"
     },
     {
         "name": "1037.5 mV",
-        "label": "1037.5 mV",
+        "label": "1037.5 mV - unsafe",
         "hex": "BCD40F"
     },
     {
