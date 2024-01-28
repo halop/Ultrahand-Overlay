@@ -106,7 +106,7 @@
     },
     {
         "name": "600 mV",
-        "label": "600 mV",
+        "label": "600 mV - default",
         "hex": "C02709"
     },
     {
