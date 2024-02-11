@@ -158,5 +158,35 @@
         "name": "650 mV",
         "label": "650 mV",
         "hex": "10EB09"
+    },
+    {
+        "name": "655 mV",
+        "label": "655 mV - unsafe",
+        "hex": "98FE09"
+    },
+    {
+        "name": "660 mV",
+        "label": "660 mV - unsafe",
+        "hex": "20120A"
+    },
+    {
+        "name": "665 mV",
+        "label": "665 mV - dangerous",
+        "hex": "A8250A"
+    },
+    {
+        "name": "670 mV",
+        "label": "670 mV - dangerous",
+        "hex": "30390A"
+    },
+    {
+        "name": "675 mV",
+        "label": "675 mV - dangerous",
+        "hex": "B84C0A"
+    },
+    {
+        "name": "680 mV",
+        "label": "680 mV - dangerous",
+        "hex": "40600A"
     }
 ]
