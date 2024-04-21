@@ -12,8 +12,8 @@
  *   Note: Please be aware that this notice cannot be altered or removed. It is a part
  *   of the project's documentation and must remain intact.
  *
- *  Licensed under CC BY-NC-SA 4.0
- *  Copyright (c) 2023 ppkantorski
+ *  Licensed under GPLv2
+ *  Copyright (c) 2024 ppkantorski
  ********************************************************************************/
 
 #pragma once
@@ -25,6 +25,7 @@
 #include <hex_funcs.hpp>
 #include <download_funcs.hpp>
 #include <list_funcs.hpp>
+#include <mod_funcs.hpp>
 
 #include <payload.hpp> // Studious Pancake
 #include <util.hpp> // Studious Pancake
@@ -65,7 +66,7 @@ static const std::string overlaysIniFilePath = settingsPath + "overlays.ini";
 static const std::string packagesIniFilePath = settingsPath + "packages.ini";
 static const std::string ultrahandRepo = "https://github.com/ppkantorski/Ultrahand-Overlay/";
 
-
+static bool isDownloadCommand = false;
 static bool commandSuccess = false;
 static bool refreshGui = false;
 static bool usingErista = util::IsErista();
@@ -133,6 +134,9 @@ void initializeTheme(std::string themeIniPath = themeConfigIniPath) {
             if (themedSection.count("highlight_color_2") == 0)
                 setIniFileValue(themeIniPath, "theme", "highlight_color_2", "#88FFFF");
             
+            if (themedSection.count("click_text_color") == 0)
+                setIniFileValue(themeIniPath, "theme", "click_text_color", "#000000");
+
             if (themedSection.count("click_color") == 0)
                 setIniFileValue(themeIniPath, "theme", "click_color", "#F7253E");
             
@@ -785,12 +789,15 @@ std::vector<std::vector<std::string>> getSourceReplacement(const std::vector<std
         
         //modifiedCmd.reserve(cmd.size()); // Reserve memory for efficiency
         commandName = cmd[0];
-        
-        if (commandName == "erista:" || commandName == "Erista:") {
+
+        if (commandName == "download")
+            isDownloadCommand = true;
+
+        if (stringToLowercase(commandName) == "erista:") {
             inEristaSection = true;
             inMarikoSection = false;
             continue;
-        } else if (commandName == "mariko:" || commandName == "Mariko:") {
+        } else if (stringToLowercase(commandName) == "mariko:") {
             inEristaSection = false;
             inMarikoSection = true;
             continue;
@@ -934,11 +941,11 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
             if (logging)
                 logMessage("Try #"+std::to_string(tryCounter));
             continue;
-        } else if (commandName == "erista:" || commandName == "Erista:") {
+        } else if (stringToLowercase(commandName) == "erista:") {
             inEristaSection = true;
             inMarikoSection = false;
             continue;
-        } else if (commandName == "mariko:" || commandName == "Mariko:") {
+        } else if (stringToLowercase(commandName) == "mariko:") {
             inEristaSection = false;
             inMarikoSection = true;
             continue;
@@ -959,7 +966,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                             replacement = replaceHexPlaceholder(arg.substr(startPos, endPos - startPos + 2), hexPath);
                             arg.replace(startPos, endPos - startPos + 2, replacement);
                             if (arg == lastArg) {
-                                arg.replace(startPos, endPos - startPos + 2, "-1"); // fall back replacement value of -1
+                                arg.replace(startPos, endPos - startPos + 2, "null"); // fall back replacement value of null
                                 commandSuccess = false;
                                 break;
                             }
@@ -974,7 +981,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                             replacement = replaceIniPlaceholder(arg.substr(startPos, endPos - startPos + 2), iniPath);
                             arg.replace(startPos, endPos - startPos + 2, replacement);
                             if (arg == lastArg) {
-                                arg.replace(startPos, endPos - startPos + 2, "-1"); // fall back replacement value of -1
+                                arg.replace(startPos, endPos - startPos + 2, "null"); // fall back replacement value of null
                                 commandSuccess = false;
                                 break;
                             }
@@ -990,7 +997,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                             replacement = stringToList(listString)[listIndex];
                             arg.replace(startPos, endPos - startPos + 2, replacement);
                             if (arg == lastArg) {
-                                arg.replace(startPos, endPos - startPos + 2, "-1"); // fall back replacement value of -1
+                                arg.replace(startPos, endPos - startPos + 2, "null"); // fall back replacement value of null
                                 commandSuccess = false;
                                 break;
                             }
@@ -1005,7 +1012,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                             replacement = replaceJsonPlaceholder(arg.substr(startPos, endPos - startPos + 2), "json", jsonString);
                             arg.replace(startPos, endPos - startPos + 2, replacement);
                             if (arg == lastArg) {
-                                arg.replace(startPos, endPos - startPos + 2, "-1"); // fall back replacement value of -1
+                                arg.replace(startPos, endPos - startPos + 2, UNAVAILABLE_SELECTION); // fall back replacement value of `UNAVAILABLE_SELECTION`
                                 commandSuccess = false;
                                 break;
                             }
@@ -1020,7 +1027,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                             replacement = replaceJsonPlaceholder(arg.substr(startPos, endPos - startPos + 2), "json_file", jsonPath);
                             arg.replace(startPos, endPos - startPos + 2, replacement);
                             if (arg == lastArg) {
-                                arg.replace(startPos, endPos - startPos + 2, "-1"); // fall back replacement value of -1
+                                arg.replace(startPos, endPos - startPos + 2, UNAVAILABLE_SELECTION); // fall back replacement value of `UNAVAILABLE_SELECTION`
                                 commandSuccess = false;
                                 break;
                             }
@@ -1229,6 +1236,7 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                         destinationPath = preprocessPath(modifiedCmd[2]);
                         downloadSuccess = false;
                         
+                        //setIniFileValue((packagePath+configFileName).c_str(), selectedCommand.c_str(), "footer", "downloading");
                         for (size_t i = 0; i < 3; ++i) { // Try 3 times.
                             downloadSuccess = downloadFile(fileUrl, destinationPath);
                             if (downloadSuccess)
@@ -1241,6 +1249,12 @@ void interpretAndExecuteCommand(const std::vector<std::vector<std::string>>& com
                         sourcePath = preprocessPath(modifiedCmd[1]);
                         destinationPath = preprocessPath(modifiedCmd[2]);
                         commandSuccess = unzipFile(sourcePath, destinationPath) && commandSuccess;
+                    }
+                } else if (commandName == "pchtxt2ips") {
+                    if (cmdSize >= 3) {
+                        sourcePath = preprocessPath(modifiedCmd[1]);
+                        destinationPath = preprocessPath(modifiedCmd[2]);
+                        commandSuccess = pchtxt2ips(sourcePath, destinationPath) && commandSuccess;
                     }
                 } else if (commandName == "exec") {
                     if (cmdSize >= 2) {

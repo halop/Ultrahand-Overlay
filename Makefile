@@ -10,8 +10,8 @@
 #
 #   GitHub Repository: https://github.com/ppkantorski/Ultrahand-Overlay
 #
-# Licensed under CC BY-NC-SA 4.0
-# Copyright (c) 2023 ppkantorski
+# Licensed under GPLv2
+# Copyright (c) 2024 ppkantorski
 ##################################################################################
 
 #---------------------------------------------------------------------------------
@@ -54,8 +54,8 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   NACP building is skipped as well. #lib/Atmosphere-libs/libexosphere/source/pmic
 #---------------------------------------------------------------------------------
 APP_TITLE	:= Ultrahand
-APP_AUTHOR	:= b0rd2dEAth
-APP_VERSION	:= 1.4.9
+APP_AUTHOR	:= ppkantorski
+APP_VERSION	:= 1.5.1
 TARGET	    := ovlmenu
 BUILD	    := build
 SOURCES	    := source common 

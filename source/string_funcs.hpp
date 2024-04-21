@@ -13,8 +13,8 @@
  *   Note: Please be aware that this notice cannot be altered or removed. It is a part
  *   of the project's documentation and must remain intact.
  * 
- *  Licensed under CC BY-NC-SA 4.0
- *  Copyright (c) 2023 ppkantorski
+ *  Licensed under both GPLv2 and CC-BY-4.0
+ *  Copyright (c) 2024 ppkantorski
  ********************************************************************************/
 
 #pragma once
@@ -286,6 +286,24 @@ json_t* stringToJson(const std::string& input) {
         logMessage("ERROR LOADING JSON FROM STRING!");
         return json_object();
     }
+}
+
+
+
+/**
+ * @brief Converts a string to lowercase.
+ *
+ * This function takes a string as input and returns a lowercase version of that string.
+ *
+ * @param str The input string to convert to lowercase.
+ * @return The lowercase version of the input string.
+ */
+
+std::string stringToLowercase(const std::string& str) {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(),
+                   [](unsigned char c) { return std::tolower(c); });
+    return result;
 }
 
 
