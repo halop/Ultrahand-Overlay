@@ -1,12 +1,19 @@
 # Ultrahand Overlay (HOS 16.0.0+)
+[![platform](https://img.shields.io/badge/platform-Switch-898c8c?logo=C++.svg)](https://gbatemp.net/forums/nintendo-switch.283/)
+[![language](https://img.shields.io/badge/language-C++-ba1632?logo=C++.svg)](https://github.com/topics/cpp)
+[![GPLv2 License](https://img.shields.io/badge/license-GPLv2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![Downloads](https://img.shields.io/github/downloads/ppkantorski/Ultrahand-Overlay/total?color=189c11)](https://github.com/ppkantorski/Ultrahand-Overlay/releases)
+
 Create directories, manage files, and customize configurations effortlessly using simple ini files.
 
-![Slideshow](https://gbatemp.net/attachments/ultrahand-gif.396110/)
+[![Ultrahand Logo](.pics/banner.gif)](https://gbatemp.net/threads/ultrahand-overlay-the-fully-craft-able-overlay-executor.633560/)
 
-Ultrahand Overlay is a [Tesla Menu](https://github.com/WerWolv/Tesla-Menu) replacement built from the ground up off of [libtesla](https://github.com/WerWolv/libtesla) that provides powerful C/C++ commands through the usage of its own custom interpretive programming language (similar to Shell/BASH).  It is a versatile tool that enables you to create and share custom command-based packages, providing enhanced functionality for managing files and directories on your Nintendo Switch.
+Ultrahand Overlay is a [Tesla Menu](https://github.com/WerWolv/Tesla-Menu) replacement built from the ground up off of [libtesla](https://github.com/WerWolv/libtesla) that provides powerful C/C++ commands through the usage of its own custom interpretive programming language (similar to Shell/BASH).  It is a versatile tool that enables you to create and share custom command-based packages, providing enhanced functionality for managing settings, files and directories on your Nintendo Switch.
 
 With Ultrahand, you have the flexibility to customize and shape your file management system according to your needs, empowering you with greater control over your system configurations.
 
+## Screenshots
+![Slideshow](https://gbatemp.net/attachments/ezgif-4-024e7852d3-gif.400949/)
 
 ## Features
 
@@ -47,10 +54,16 @@ To use Ultrahand, follow these steps:
 2. Download the latest Ultrahand [ovlmenu.ovl](https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest/download/ovlmenu.ovl) and place it within `/switch/.overlays/`.
     - WARNING: This will overwrite `Tesla Menu` if already installed.
 3. After installing Ultrahand Overlay, a new folder named `ultrahand` will be created within the root config folder on your SD card (`/config/ultrahand/`) along with a `config.ini` file containing various Ultrahand settings.
-4. Launch Ultrahand similarly to `Tesla Menu` with your specified hotkey.  A new folder will be made (`/switch/.packages/`) with a preset `package.ini` file for your base menu commands.
+4. Launch Ultrahand (similarly to `Tesla Menu`) with Tesla's default hotkeys or Ultrahand's (`ZL+ZR+DDOWN`).  A new folder will be made (`/switch/.packages/`) with a preset `package.ini` file for your base menu commands.
 
 5. Place your custom `package.ini` package file in your Ultrahand package directory (`/switch/.packages/<PACKAGE_NAME>/`). This file will contains the commands for your custom Ultrahand package.
-6. Your commands will now show up on the packages menu within Ultrahand.  You can click A to execute any command as well as click X to view/execute the individual command lines written in the ini for execution.
+6. Your commands will now show up on the packages menu within Ultrahand.
+
+## Additional Features
+- You can click `A` to execute any command as well as click `MINUS` to view/execute the individual command lines written in the ini for execution.
+- You can click `PLUS` on the main menu to enter the settings menu.
+- You can click `X` on top of an overlay/package to star them.
+- You can click `Y` on top of an overlay/package to configure additional settings.
 
 For additional assistance with custom packages, feel free to checkout the [Ultrahand Overlay Wiki](https://github.com/ppkantorski/Ultrahand-Overlay/wiki).
 
@@ -63,7 +76,8 @@ Please note that running homebrew software on your Nintendo Switch may void your
 
 To compile and run the software, you need to have the following C/C++ dependencies installed:
 
-- [custom libtesla fork](https://github.com/ppkantorski/Ultrahand-Overlay/tree/main/lib/libtesla)
+- [libultra](lib/libultra)
+- [custom libtesla](lib/libtesla)
 - switch-curl
 - switch-zziplib
 - switch-mbedtls
@@ -76,8 +90,6 @@ Contributions are welcome! If you have any ideas, suggestions, or bug reports, p
 
 ## License
 
-This project is licensed under the [CC-BY-NC-4.0 License](LICENSE).
+This project is licensed and distributed under [GPLv2](LICENSE) with a custom library utilizing [CC-BY-4.0](SUB_LICENSE).
 
-Copyright (c) 2023 ppkantorski
-
-All rights reserved.
+Copyright (c) 2024 ppkantorski

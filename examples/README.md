@@ -12,7 +12,7 @@ Ultrahand Overlay is a powerful tool that allows you to customize and enhance yo
 
 - [Mod Master](Mod%20Master/README.md): Dive into the Mod Master example to learn how to leverage Ultrahand Overlay to manage and optimize your favorite game modifications.
 
-- [Overclock Buster](Overclock%20Buster/README.md): Discover the Overclock Buster example, which demonstrates how to push your device's performance to the limit by applying custom overclocking settings to OC Suite / 4IFIR kip files.
+- [OC Toolkit](OC%20Toolkit/README.md): OC Toolkit demonstrates how to push your device's performance to the limit by applying custom overclocks, timings, and undervoltage settings to kip files.
 
 - [Broomstick](Broomstick/README.md): The Broomstick example provides a convenient way to offload and restore specific overlays, allowing you to free up system resources and improve performance.
 
@@ -34,10 +34,7 @@ Note: Before applying any overlays or modifications, make sure you understand th
 
 Contributions from the community are welcome! If you have any improvements, bug fixes, or new examples to share, feel free to submit a pull request.
 
-## License
 
-This project is licensed under the [CC-BY-NC-4.0 License](LICENSE).
-
-Copyright (c) 2023 ppkantorski
+Copyright (c) 2024 ppkantorski
 
 All rights reserved.

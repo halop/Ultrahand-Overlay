@@ -10,8 +10,8 @@
 #
 #   GitHub Repository: https://github.com/ppkantorski/Ultrahand-Overlay
 #
-# Copyright (c) 2023 ppkantorski
-# All rights reserved.
+# Licensed under GPLv2
+# Copyright (c) 2024 ppkantorski
 ##################################################################################
 
 #---------------------------------------------------------------------------------
@@ -54,12 +54,12 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   NACP building is skipped as well. #lib/Atmosphere-libs/libexosphere/source/pmic
 #---------------------------------------------------------------------------------
 APP_TITLE	:= Ultrahand
-APP_AUTHOR	:= b0rd2dEAth
-APP_VERSION	:= 1.3.5
+APP_AUTHOR	:= ppkantorski
+APP_VERSION	:= 1.5.9
 TARGET	    := ovlmenu
 BUILD	    := build
 SOURCES	    := source common 
-INCLUDES	:= source common include lib/libtesla/include
+INCLUDES	:= source common include lib/libultra/include lib/libtesla/include
 NO_ICON	    := 1
 
 #---------------------------------------------------------------------------------
@@ -67,18 +67,20 @@ NO_ICON	    := 1
 #---------------------------------------------------------------------------------
 ARCH := -march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 
-CFLAGS := -g -Wall -Os -ffunction-sections \
+CFLAGS := -Wall -Os -ffunction-sections -fdata-sections -flto\
 			$(ARCH) $(DEFINES)
 
-CFLAGS += $(INCLUDE) -D__SWITCH__ -DAPP_VERSION="\"$(APP_VERSION)\""
+CFLAGS += $(INCLUDE) -D__SWITCH__ -DAPP_VERSION="\"$(APP_VERSION)\"" -D_FORTIFY_SOURCE=2
 
-CXXFLAGS := $(CFLAGS) -fexceptions -std=c++20 -Wno-dangling-else
+CXXFLAGS := $(CFLAGS) -std=c++20 -Wno-dangling-else
 
-ASFLAGS := -g $(ARCH)
-LDFLAGS = -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
+ASFLAGS := $(ARCH)
+LDFLAGS += -specs=$(DEVKITPRO)/libnx/switch.specs $(ARCH) -Wl,-Map,$(notdir $*.map)
 
 LIBS := -lcurl -lz -lzzip -lmbedtls -lmbedx509 -lmbedcrypto -ljansson -lnx 
 
+CXXFLAGS += -fno-exceptions -ffunction-sections -fdata-sections -fno-rtti
+LDFLAGS += -Wl,--gc-sections -Wl,--as-needed
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
